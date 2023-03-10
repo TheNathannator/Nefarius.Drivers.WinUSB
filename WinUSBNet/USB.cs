@@ -5,6 +5,7 @@
  *  http://www.opensource.org/licenses/mit-license.php
  */
 
+using Windows.Win32;
 using Windows.Win32.Devices.Usb;
 
 namespace Nefarius.Drivers.WinUSB;
@@ -94,4 +95,43 @@ public enum USBTransferType
 
     /// <summary>The pipe is an interrupt transfer pipe</summary>
     Interrupt = USBD_PIPE_TYPE.UsbdPipeTypeInterrupt,
+}
+
+/// <summary>
+///     Standard bRequest values for a transfer.
+/// </summary>
+public enum USBRequest : byte
+{
+    /// <summary>Get the status of the recipient.</summary>
+    GetStatus = (byte)PInvoke.USB_REQUEST_GET_STATUS,
+
+    /// <summary>Disable a feature on the recipient.</summary>
+    ClearFeature = (byte)PInvoke.USB_REQUEST_CLEAR_FEATURE,
+
+    /// <summary>Enable a feature on the recipient.</summary>
+    SetFeature = (byte)PInvoke.USB_REQUEST_SET_FEATURE,
+
+    /// <summary>Set the address to use for the device.</summary>
+    SetAddress = (byte)PInvoke.USB_REQUEST_SET_ADDRESS,
+
+    /// <summary>Get a descriptor from the device.</summary>
+    GetDescriptor = (byte)PInvoke.USB_REQUEST_GET_DESCRIPTOR,
+
+    /// <summary>Update or add a descriptor to the device.</summary>
+    SetDescriptor = (byte)PInvoke.USB_REQUEST_SET_DESCRIPTOR,
+
+    /// <summary>Get the current configuration value for the device.</summary>
+    GetConfiguration = (byte)PInvoke.USB_REQUEST_GET_CONFIGURATION,
+
+    /// <summary>Set the current configuration state of the device.</summary>
+    SetConfiguration = (byte)PInvoke.USB_REQUEST_SET_CONFIGURATION,
+
+    /// <summary>Get the current alternate setting for an interface.</summary>
+    GetInterface = (byte)PInvoke.USB_REQUEST_GET_INTERFACE,
+
+    /// <summary>Set the current alternate setting of an interface.</summary>
+    SetInterface = (byte)PInvoke.USB_REQUEST_SET_INTERFACE,
+
+    /// <summary>Set, then get, an endpoint's synchronization frame.</summary>
+    SyncFrame = (byte)PInvoke.USB_REQUEST_SYNC_FRAME,
 }
