@@ -98,6 +98,57 @@ public enum USBTransferType
 }
 
 /// <summary>
+///     The recipient for bmRequestType.<br/>
+///     OR together with a value from <see cref="USBRequestType"/> and <see cref="USBRequestDirection"/> to create a
+///     bmRequestType value.
+/// </summary>
+public enum USBRequestRecipient : byte
+{
+    /// <summary>The device will receive the request.</summary>
+    Device = (byte)PInvoke.BMREQUEST_TO_DEVICE,
+
+    /// <summary>The interface will receive the request.</summary>
+    Interface = (byte)PInvoke.BMREQUEST_TO_INTERFACE,
+
+    /// <summary>The endpoint will receive the request.</summary>
+    Endpoint = (byte)PInvoke.BMREQUEST_TO_ENDPOINT,
+
+    /// <summary>Some other recipient will receive the request.</summary>
+    Other = (byte)PInvoke.BMREQUEST_TO_OTHER,
+}
+
+/// <summary>
+///     The request type for bmRequestType. (Pre-bit-shifted for your convenience.)<br/>
+///     OR together with a value from <see cref="USBRequestRecipient"/> and <see cref="USBRequestDirection"/> to create
+///     a bmRequestType value.
+/// </summary>
+public enum USBRequestType : byte
+{
+    /// <summary>A USB-defined request.</summary>
+    Standard = (byte)(PInvoke.BMREQUEST_STANDARD << 5),
+
+    /// <summary>A class-defined request.</summary>
+    Class = (byte)(PInvoke.BMREQUEST_CLASS << 5),
+
+    /// <summary>A vendor-defined request.</summary>
+    Vendor = (byte)(PInvoke.BMREQUEST_VENDOR << 5),
+}
+
+/// <summary>
+///     The direction for bmRequestType. (Pre-bit-shifted for your convenience.)<br/>
+///     OR together with a value from <see cref="USBRequestRecipient"/> and <see cref="USBRequestType"/> to create a
+///     bmRequestType value.
+/// </summary>
+public enum USBRequestDirection : byte
+{
+    /// <summary>Data is sent from the host to the device.</summary>
+    HostToDevice = (byte)(PInvoke.BMREQUEST_HOST_TO_DEVICE << 7),
+
+    /// <summary>Data is sent from the device to the host.</summary>
+    DeviceToHost = (byte)(PInvoke.BMREQUEST_DEVICE_TO_HOST << 7)
+}
+
+/// <summary>
 ///     Standard bRequest values for a transfer.
 /// </summary>
 public enum USBRequest : byte
